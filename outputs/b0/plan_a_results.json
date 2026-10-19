@@ -1,0 +1,126 @@
+{
+  "startTime": "2026-10-15T18:57:50.375Z",
+  "initialCredit": {
+    "success": true,
+    "status": 200,
+    "data": {
+      "status": 200,
+      "results": [
+        {
+          "id": 411220881512072450,
+          "type": "ApiPaygToken",
+          "amount": 1000,
+          "amount_dec": 1000,
+          "expiry": 1799884799000
+        },
+        {
+          "id": 411219064191455200,
+          "type": "ApiPaygToken",
+          "amount": 40,
+          "amount_dec": 40,
+          "expiry": 1823644799000
+        }
+      ]
+    },
+    "elapsed": 1.283
+  },
+  "finalCredit": {
+    "success": true,
+    "status": 200,
+    "data": {
+      "status": 200,
+      "results": [
+        {
+          "id": 411220881512072450,
+          "type": "ApiPaygToken",
+          "amount": 1000,
+          "amount_dec": 1000,
+          "expiry": 1799884799000
+        },
+        {
+          "id": 411219064191455200,
+          "type": "ApiPaygToken",
+          "amount": 40,
+          "amount_dec": 40,
+          "expiry": 1823644799000
+        }
+      ]
+    },
+    "elapsed": 0.296
+  },
+  "planA": {
+    "attempts": [
+      {
+        "success": false,
+        "taskId": "5M9UAIzXgZ5hVAZVBXxaM33NNfFw1f0DBPsY77B7tum1UXIEQj75othr9tMOqnqc",
+        "scale": 3,
+        "isRightEar": true,
+        "location": [
+          205,
+          905
+        ],
+        "error": "error",
+        "pollResult": {
+          "taskStatus": "error",
+          "result": {
+            "success": true,
+            "status": 200,
+            "data": {
+              "status": 200,
+              "data": {
+                "error": "2",
+                "error_message": "earlobe alignment not confident.",
+                "results": null,
+                "task_status": "error"
+              }
+            },
+            "elapsed": 1.048
+          },
+          "pollCount": 1
+        }
+      },
+      {
+        "success": false,
+        "taskId": "ulp9h3tY62jzoi9R7Krr0rCpWlQU8RtevrZxGBIegX77ax1Mor_1m4ys-RNgRT5O",
+        "scale": 3,
+        "isRightEar": false,
+        "location": [
+          878,
+          905
+        ],
+        "error": "error",
+        "pollResult": {
+          "taskStatus": "error",
+          "result": {
+            "success": true,
+            "status": 200,
+            "data": {
+              "status": 200,
+              "data": {
+                "error": "2",
+                "error_message": "earlobe alignment not confident.",
+                "results": null,
+                "task_status": "error"
+              }
+            },
+            "elapsed": 0.3
+          },
+          "pollCount": 1
+        }
+      }
+    ],
+    "success": false,
+    "savedImages": []
+  },
+  "planB": {
+    "generatedImages": [],
+    "attempts": [],
+    "success": false,
+    "savedImages": []
+  },
+  "measurements": [],
+  "unitsUsed": 0,
+  "failedAttempts": 2,
+  "totalElapsedTime": 10.966,
+  "endTime": "2026-10-15T18:58:01.346Z"
+}

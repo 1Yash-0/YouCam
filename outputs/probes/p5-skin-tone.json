@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-10-16T08:44:25.666Z",
+  "request": {
+    "src_file_id": "XemtOa5B/s/C8CBIuyxIPOXFSE4u18GoL7bLlfHSETsLbKfeLEmuXUa9yH4wuc2K"
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "status": 200,
+      "data": {
+        "error": "error_face_not_forward_facing",
+        "error_message": "The face in the input image is not facing forward.",
+        "results": null,
+        "task_status": "error"
+      }
+    }
+  },
+  "elapsedSeconds": 6.976
+}

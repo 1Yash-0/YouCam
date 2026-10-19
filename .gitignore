@@ -1,0 +1,18 @@
+# Secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Dependencies and builds
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Runtime data (uploaded photos, cache, unit ledger)
+.data/
+
+# Agent scratch logs
+.agents/
+
+# Logs
+*.log

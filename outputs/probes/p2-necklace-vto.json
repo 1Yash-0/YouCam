@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-10-16T08:37:38.454Z",
+  "request": {
+    "src_file_id": "Txm11NbIXTgyz1HGhqZKgBDy6QzTowSMZznR0rnUh9ULbKfeLEmuXUa9yH4wuc2K",
+    "ref_file_ids": [
+      "R66wy1fy3Dyx6HBXipxH5NFFMCZ0fJffHK2IHoqq+PELbKfeLEmuXUa9yH4wuc2K"
+    ],
+    "source_info": {
+      "name": "gen_face.png"
+    },
+    "object_infos": [
+      {
+        "name": "gen_necklace.png",
+        "parameter": {
+          "necklace_need_remove_background": true,
+          "necklace_shadow_intensity": 0.5,
+          "necklace_ambient_light_intensity": 0.5
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "status": 200,
+      "data": {
+        "error": "4",
+        "error_message": "Neck roll check failed.",
+        "results": null,
+        "task_status": "error"
+      }
+    }
+  },
+  "elapsedSeconds": 3.683
+}

@@ -1,0 +1,62 @@
+{
+  "inputImages": {
+    "face.jpg": {
+      "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\face.jpg",
+      "fileSize": 115883,
+      "dimensions": "?x?",
+      "width": 0,
+      "format": "Detected via PowerShell"
+    },
+    "earring.jpg": {
+      "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\earring.jpg",
+      "fileSize": 2040077,
+      "dimensions": "?x?",
+      "width": 0,
+      "format": "Detected via PowerShell"
+    },
+    "gen_face.png": {
+      "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\gen_face.png",
+      "fileSize": 2135103,
+      "dimensions": "?x?",
+      "width": 0,
+      "format": "Detected via PowerShell"
+    },
+    "gen_earring.png": {
+      "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\gen_earring.png",
+      "fileSize": 1946957,
+      "dimensions": "?x?",
+      "width": 0,
+      "format": "Detected via PowerShell"
+    }
+  },
+  "outputImages": {
+    "b_earring_3cm": {
+      "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\b_earring_3cm_attempt1.png",
+      "fileSize": 2174552,
+      "dimensions": "?x?",
+      "width": 0,
+      "format": "Detected via PowerShell"
+    },
+    "b_earring_6cm": {
+      "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\b_earring_6cm_attempt3.png",
+      "fileSize": 2182151,
+      "dimensions": "?x?",
+      "width": 0,
+      "format": "Detected via PowerShell"
+    }
+  },
+  "comparisons": [
+    {
+      "name": "3cm_vs_face",
+      "inputDimensions": "?x?",
+      "outputDimensions": "?x?",
+      "match": true
+    },
+    {
+      "name": "6cm_vs_face",
+      "inputDimensions": "?x?",
+      "outputDimensions": "?x?",
+      "match": true
+    }
+  ]
+}

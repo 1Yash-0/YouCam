@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-10-16T08:41:48.763Z",
+  "request": {},
+  "response": {
+    "status": 500,
+    "data": {
+      "error": "fetch failed"
+    }
+  },
+  "elapsedSeconds": 0
+}

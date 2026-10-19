@@ -1,0 +1,83 @@
+{
+  "startTime": "2026-10-15T18:48:45.005Z",
+  "step1": {
+    "success": true,
+    "status": 200,
+    "data": {
+      "status": 200,
+      "results": [
+        {
+          "id": 411220881512072450,
+          "type": "ApiPaygToken",
+          "amount": 1000,
+          "amount_dec": 1000,
+          "expiry": 1799884799000
+        },
+        {
+          "id": 411219064191455200,
+          "type": "ApiPaygToken",
+          "amount": 40,
+          "amount_dec": 40,
+          "expiry": 1823644799000
+        }
+      ]
+    },
+    "elapsed": 1.105
+  },
+  "step2": {
+    "entries": [],
+    "totalPages": 1,
+    "totalMatchingEntries": 0
+  },
+  "step3": {
+    "success": false,
+    "result": {
+      "success": true,
+      "status": 200,
+      "data": {
+        "status": 200,
+        "data": {
+          "error": "2",
+          "error_message": "earlobe alignment not confident.",
+          "results": null,
+          "task_status": "error"
+        }
+      },
+      "elapsed": 0.285
+    }
+  },
+  "step4": null,
+  "step5": null,
+  "step6": {
+    "error": "No output images to analyze"
+  },
+  "step7": {
+    "success": true,
+    "status": 200,
+    "data": {
+      "status": 200,
+      "results": [
+        {
+          "id": 411220881512072450,
+          "type": "ApiPaygToken",
+          "amount": 1000,
+          "amount_dec": 1000,
+          "expiry": 1799884799000
+        },
+        {
+          "id": 411219064191455200,
+          "type": "ApiPaygToken",
+          "amount": 40,
+          "amount_dec": 40,
+          "expiry": 1823644799000
+        }
+      ]
+    },
+    "elapsed": 0.271
+  },
+  "unitBudget": 4,
+  "unitsUsed": 0,
+  "failedAttempts": 0,
+  "errors": [],
+  "endTime": "2026-10-15T18:48:51.178Z"
+}

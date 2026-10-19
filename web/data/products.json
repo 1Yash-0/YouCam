@@ -1,0 +1,78 @@
+[
+  {
+    "id": "gilded-teardrop",
+    "name": "Gilded Teardrop",
+    "brand": "Kaari Studio",
+    "type": "single",
+    "heightCm": 3.0,
+    "widthCm": 1.3,
+    "metal": "gold",
+    "priceInr": 1499,
+    "imagePath": "/products/teardrop-gold.png",
+    "sizes": [2.0, 3.0, 4.5, 6.0],
+    "source": "Generated with YouCam AI Image Generator V2.0",
+    "licence": "Generated for this project"
+  },
+  {
+    "id": "met-gold-earring",
+    "name": "Gold and Glass Earring",
+    "brand": "Met Heritage (public domain)",
+    "type": "single",
+    "heightCm": 6.0,
+    "widthCm": 4.0,
+    "metal": "gold",
+    "priceInr": 2499,
+    "imagePath": "/products/met-earring-446792.jpg",
+    "source": "https://www.metmuseum.org/art/collection/search/446792",
+    "licence": "CC0 (The Met Open Access)"
+  },
+  {
+    "id": "met-gold-pendant",
+    "name": "Gold Pendant (Jkumka)",
+    "brand": "Met Heritage (public domain)",
+    "type": "single",
+    "heightCm": 4.0,
+    "widthCm": 3.5,
+    "metal": "gold",
+    "priceInr": 3499,
+    "imagePath": "/products/met-pendant-446796.jpg",
+    "source": "https://www.metmuseum.org/art/collection/search/446796",
+    "licence": "CC0 (The Met Open Access)"
+  },
+  {
+    "id": "orb-chain",
+    "name": "Orb Chain",
+    "brand": "Kaari Studio",
+    "type": "necklace",
+    "lengthCm": 40,
+    "priceInr": 1999,
+    "imagePath": "/products/orb-chain.png",
+    "source": "Generated with YouCam AI Image Generator V2.0",
+    "licence": "Generated for this project"
+  },
+  {
+    "id": "dot-stud",
+    "name": "Dot Stud",
+    "brand": "Kaari Studio",
+    "type": "stud",
+    "heightCm": 0.6,
+    "widthCm": 0.6,
+    "metal": "silver",
+    "priceInr": 699,
+    "imagePath": "/products/dot-stud.png",
+    "sizes": [0.4, 0.6, 0.8],
+    "source": "Generated with YouCam AI Image Generator V2.0",
+    "licence": "Generated for this project"
+  },
+  {
+    "id": "emerald-blouse",
+    "name": "Emerald Silk Blouse",
+    "brand": "Kaari Studio",
+    "type": "garment",
+    "garmentCategory": "upper_body",
+    "priceInr": 2999,
+    "imagePath": "/products/emerald-blouse.png",
+    "source": "Generated with YouCam AI Image Generator V2.0",
+    "licence": "Generated for this project"
+  }
+]

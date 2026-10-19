@@ -1,0 +1,123 @@
+{
+  "project": "Darpan - YouCam Feasibility Test B0",
+  "timestamp": "2026-10-15T23:41:00+05:30",
+  "node_version": "v24.18.0",
+  "environment": {
+    "operating_system": "Windows",
+    "project_directory": "E:\\Chaos\\Hackathons\\Youcam",
+    "node_requirement": ">=18",
+    "node_check": "PASS"
+  },
+  "api_status": {
+    "base_url": "https://yce-api-01.makeupar.com",
+    "key_exists": true,
+    "key_valid": false,
+    "validation_status": 401,
+    "validation_error": "Unauthorized",
+    "error_code": "InvalidAccessToken",
+    "action_taken": "Stopped as per instructions when key is rejected"
+  },
+  "input_images": {
+    "face": {
+      "url": "https://plugins-media.makeupar.com/strapi/assets/sample_Image_1_202b6bf6e6.jpg",
+      "local_path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\face.jpg",
+      "width": 1080,
+      "height": 1437,
+      "size_bytes": 115883,
+      "size_kb": 113.17,
+      "download_success": true
+    },
+    "earring": {
+      "url": "https://images.metmuseum.org/CRDImages/is/original/LC-15_95_129.jpg",
+      "local_path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\earring.jpg",
+      "width": 1379,
+      "height": 2068,
+      "size_bytes": 2040077,
+      "size_mb": 1.95,
+      "long_side": 2068,
+      "download_success": true,
+      "api_requirements": {
+        "long_side_le_4096": true,
+        "size_lt_10mb": true,
+        "meets_requirements": true,
+        "note": "Can use URL directly, no resizing needed"
+      }
+    }
+  },
+  "planned_tests": [
+    {
+      "test": "A",
+      "label": "earring_3cm",
+      "scale": 3.0,
+      "endpoint": "/s2s/v2.0/task/2d-vto/earring",
+      "max_units": 1,
+      "status": "NOT_EXECUTED",
+      "reason": "API key invalid"
+    },
+    {
+      "test": "B",
+      "label": "earring_6cm",
+      "scale": 6.0,
+      "endpoint": "/s2s/v2.0/task/2d-vto/earring",
+      "max_units": 1,
+      "status": "NOT_EXECUTED",
+      "reason": "Depends on Test A success"
+    },
+    {
+      "test": "C",
+      "label": "earring_4_5cm",
+      "scale": 4.5,
+      "endpoint": "/s2s/v2.0/task/2d-vto/earring",
+      "max_units": 1,
+      "status": "NOT_EXECUTED",
+      "reason": "Depends on Test A and B success"
+    }
+  ],
+  "unit_budget": {
+    "max_units": 4,
+    "units_used": 0,
+    "units_remaining": 4,
+    "failed_tasks": 1,
+    "failed_task_reason": "API key validation failed (401)"
+  },
+  "scripts_created": [
+    "scripts/feasibility.mjs",
+    "scripts/run_tests.mjs",
+    "scripts/check_api.mjs",
+    "scripts/download_inputs.mjs",
+    "scripts/measure_diffs.mjs",
+    "scripts/measure_diffs.ps1",
+    "scripts/measure_images.ps1"
+  ],
+  "output_files": [
+    "outputs/b0/inputs/face.jpg",
+    "outputs/b0/inputs/earring.jpg",
+    "outputs/b0/feasibility_report.md",
+    "outputs/b0/summary.json"
+  ],
+  "missing_data": {
+    "credit_balance_before": "UNKNOWN (API key invalid)",
+    "credit_balance_after": "UNKNOWN (no tests executed)",
+    "feature_cost_response": "UNKNOWN (API key invalid)",
+    "task_responses": "NONE (no tests executed)",
+    "output_images": "NONE (no tests executed)",
+    "diff_measurements": "NONE (no output images)",
+    "height_ratio": "NONE (no output images)"
+  },
+  "blockers": [
+    {
+      "issue": "Invalid API Key",
+      "description": "YOUCAM_API_KEY returns 401 Unauthorized with 'InvalidAccessToken'",
+      "impact": "Cannot proceed with any paid API tests",
+      "required_action": "Obtain valid API key from YouCam hackathon registration"
+    }
+  ],
+  "verification": {
+    "node_version_verified": true,
+    "scripts_created_and_runnable": true,
+    "input_images_downloaded": true,
+    "image_dimensions_measured": true,
+    "api_key_tested": true,
+    "error_handled_as_required": true
+  }
+}

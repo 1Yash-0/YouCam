@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-10-16T08:46:16.111Z",
+  "request": {
+    "src_file_id": "SIaicSvjuf+9wMdD5lyRjjfK7a9cjLGXNgeSBgpsErULbKfeLEmuXUa9yH4wuc2K",
+    "ref_file_id": "JLImnGBvat0P+nuQTinctnE+hZgh1fRELR/3x+5loN8LbKfeLEmuXUa9yH4wuc2K",
+    "garment_category": "upper_body"
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "status": 200,
+      "data": {
+        "error": null,
+        "results": {
+          "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122546765853/v2/aeMNNB0KmUIP8rnQ996tC5Q/740ae816-3863-4e4a-97a8-19b754ba94d5.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261016T084615Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261016%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=cb711acff9a0eed18dbfd0159030ed409b7a18c141c04934ef6eae08fe56b613"
+        },
+        "task_status": "success"
+      }
+    }
+  },
+  "elapsedSeconds": 10.146
+}

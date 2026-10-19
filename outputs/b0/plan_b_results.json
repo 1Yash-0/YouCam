@@ -1,0 +1,181 @@
+{
+  "startTime": "2026-10-15T19:00:36.390Z",
+  "initialCredit": {
+    "success": true,
+    "status": 200,
+    "data": {
+      "status": 200,
+      "results": [
+        {
+          "id": 411220881512072450,
+          "type": "ApiPaygToken",
+          "amount": 1000,
+          "amount_dec": 1000,
+          "expiry": 1799884799000
+        },
+        {
+          "id": 411219064191455200,
+          "type": "ApiPaygToken",
+          "amount": 40,
+          "amount_dec": 40,
+          "expiry": 1823644799000
+        }
+      ]
+    },
+    "elapsed": 1.089
+  },
+  "finalCredit": {
+    "success": true,
+    "status": 200,
+    "data": {
+      "status": 200,
+      "results": [
+        {
+          "id": 411220881512072450,
+          "type": "ApiPaygToken",
+          "amount": 996,
+          "amount_dec": 996,
+          "expiry": 1799884799000
+        },
+        {
+          "id": 411219064191455200,
+          "type": "ApiPaygToken",
+          "amount": 40,
+          "amount_dec": 40,
+          "expiry": 1823644799000
+        }
+      ]
+    },
+    "elapsed": 0.308
+  },
+  "planB": {
+    "imageGeneration": {
+      "face": {
+        "success": true,
+        "taskId": "fWrUFI-pi3gZq_QG5Qa2ztN2eHv9zW35eP8pbfYryiLG0vmNx88XA2BLtM7vetR0",
+        "imageUrl": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497239497/v2/aeMNNB0KmUIP8rnQ996tC5Q/f749c003-6f85-4f5e-b47e-5c0f2a408462.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190050Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e576948354de50a495992f9d5030959e6650fb0720c1bc65b830eea2c545e52b",
+        "savedPath": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\gen_face.png",
+        "pollResult": {
+          "taskStatus": "success",
+          "result": {
+            "success": true,
+            "status": 200,
+            "data": {
+              "status": 200,
+              "data": {
+                "error": null,
+                "results": {
+                  "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497239497/v2/aeMNNB0KmUIP8rnQ996tC5Q/f749c003-6f85-4f5e-b47e-5c0f2a408462.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190050Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e576948354de50a495992f9d5030959e6650fb0720c1bc65b830eea2c545e52b"
+                },
+                "task_status": "success"
+              }
+            },
+            "elapsed": 0.282
+          },
+          "pollCount": 3
+        }
+      },
+      "earring": {
+        "success": true,
+        "taskId": "lqoNjQLZN_NwNrAwpFywXHfLv2fjdNCgaPYlsUx0AOaUb6N-DWsu1myvNFiLTLj4",
+        "imageUrl": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497252557/v2/aeMNNB0KmUIP8rnQ996tC5Q/c27b2ab5-1ecf-4399-9b13-8d3e6d3396b0.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190105Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=1c9994dd63a9dc928d920ea9706f59eb9d84f0a3dcb119618e9db905b64ebe41",
+        "savedPath": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\inputs\\gen_earring.png",
+        "pollResult": {
+          "taskStatus": "success",
+          "result": {
+            "success": true,
+            "status": 200,
+            "data": {
+              "status": 200,
+              "data": {
+                "error": null,
+                "results": {
+                  "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497252557/v2/aeMNNB0KmUIP8rnQ996tC5Q/c27b2ab5-1ecf-4399-9b13-8d3e6d3396b0.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190105Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=1c9994dd63a9dc928d920ea9706f59eb9d84f0a3dcb119618e9db905b64ebe41"
+                },
+                "task_status": "success"
+              }
+            },
+            "elapsed": 0.306
+          },
+          "pollCount": 4
+        }
+      }
+    },
+    "earringAttempts": [
+      {
+        "success": true,
+        "taskId": "soQcrBOs9eC-BahCVfuXcC6zkiwRpbpqN7EUCyuX1BnpfHQwqo-i9r8smagjvB0f",
+        "scale": 3,
+        "isRightEar": true,
+        "imageUrl": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497268153/v2/aeMNNB0KmUIP8rnQ996tC5Q/6678d67b-2ee6-4fa5-ad9f-144bc2586883.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190114Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=2b27afafeccf12d22b065af5116e1b8330fcf2eae159c6750e16a654514ad04c",
+        "savedPath": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\b_earring_3cm_attempt1.png",
+        "pollResult": {
+          "taskStatus": "success",
+          "result": {
+            "success": true,
+            "status": 200,
+            "data": {
+              "status": 200,
+              "data": {
+                "error": null,
+                "results": {
+                  "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497268153/v2/aeMNNB0KmUIP8rnQ996tC5Q/6678d67b-2ee6-4fa5-ad9f-144bc2586883.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190114Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=2b27afafeccf12d22b065af5116e1b8330fcf2eae159c6750e16a654514ad04c"
+                },
+                "task_status": "success"
+              }
+            },
+            "elapsed": 0.306
+          },
+          "pollCount": 2
+        }
+      },
+      {
+        "success": true,
+        "taskId": "iw_2TVAJBw8WxVy5Nli4sUnaucGBwiJtdlcJlZX-UpzcM6l1oJFiIbAM6EvVOlTa",
+        "scale": 6,
+        "isRightEar": true,
+        "imageUrl": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497277273/v2/aeMNNB0KmUIP8rnQ996tC5Q/34f4b371-e52f-48a8-b3cb-97bf6bc2febe.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190123Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=684e6f749cd28a896fcee14e7433faa522fb6dca6a4ebe415f04b38ad1f46396",
+        "savedPath": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\b_earring_6cm_attempt3.png",
+        "pollResult": {
+          "taskStatus": "success",
+          "result": {
+            "success": true,
+            "status": 200,
+            "data": {
+              "status": 200,
+              "data": {
+                "error": null,
+                "results": {
+                  "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122497277273/v2/aeMNNB0KmUIP8rnQ996tC5Q/34f4b371-e52f-48a8-b3cb-97bf6bc2febe.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261015T190123Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261015%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=684e6f749cd28a896fcee14e7433faa522fb6dca6a4ebe415f04b38ad1f46396"
+                },
+                "task_status": "success"
+              }
+            },
+            "elapsed": 0.314
+          },
+          "pollCount": 2
+        }
+      }
+    ],
+    "success": true,
+    "savedImages": [
+      {
+        "scale": 3,
+        "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\b_earring_3cm_attempt1.png",
+        "filename": "b_earring_3cm.png",
+        "isRightEar": true
+      },
+      {
+        "scale": 6,
+        "path": "E:\\Chaos\\Hackathons\\Youcam\\outputs\\b0\\b_earring_6cm_attempt3.png",
+        "filename": "b_earring_6cm.png",
+        "isRightEar": true
+      }
+    ]
+  },
+  "measurements": [],
+  "unitsUsed": 4,
+  "failedAttempts": 0,
+  "totalElapsedTime": 48.922,
+  "endTime": "2026-10-15T19:01:25.315Z"
+}

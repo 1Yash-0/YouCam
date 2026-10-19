@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-16T08:37:38.449Z",
+  "request": {
+    "model": "youcam-image-v2",
+    "prompt": "product photo of a single delicate gold chain necklace with a small round pendant, laid flat in a U shape, front view, centred, plain white background, sharp focus",
+    "negative_prompt": "blurry, low quality, distorted, watermark, text",
+    "size": "1328*1328",
+    "prompt_extend": true
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "status": 200,
+      "data": {
+        "error": null,
+        "results": {
+          "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122546236781/v2/aeMNNB0KmUIP8rnQ996tC5Q/738a6fe5-43d2-47fd-a0e1-bdd915a1224c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261016T083726Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261016%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=4883684bbf658d2014f8aa3e7e3eaf5c7f9ca543c7346d0aaf2fa8a195c1ac34"
+        },
+        "task_status": "success"
+      }
+    }
+  },
+  "elapsedSeconds": 10.657
+}

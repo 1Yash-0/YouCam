@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-10-16T08:39:51.866Z",
+  "request": {
+    "src_file_id": "mFLEVB9XvIR65Zlsn51kB9WuEbu7kBgfmFy0NVZ6C4wLbKfeLEmuXUa9yH4wuc2K",
+    "version": "1.0",
+    "effects": [
+      {
+        "category": "skin_smooth",
+        "skinSmoothStrength": 0,
+        "skinSmoothColorIntensity": 0
+      },
+      {
+        "category": "lip_color",
+        "shape": {
+          "name": "original"
+        },
+        "morphology": {
+          "fullness": 50,
+          "wrinkless": 50
+        },
+        "palettes": [
+          {
+            "color": "#9B1B30",
+            "texture": "matte",
+            "colorIntensity": 70
+          }
+        ],
+        "style": {
+          "type": "full"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "status": 200,
+      "data": {
+        "error": null,
+        "results": {
+          "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122546381553/v2/aeMNNB0KmUIP8rnQ996tC5Q/d4dc653e-3b2c-40bf-a362-26dd26add329.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261016T083951Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261016%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=8bf312d656f41829aa9c2f95067d01df525e5f556ee864042b87fe889c17c7c8"
+        },
+        "task_status": "success"
+      }
+    }
+  },
+  "elapsedSeconds": 10.23
+}

@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  /* Palette */
+  --bg: #FFFFFF;
+  --paper: #F7F3EC;
+  --ink: #0B0B0A;
+  --ink-2: #5E5A55;
+  --line: #E6E1D8;
+  --gold: #B08A3E;
+  --ok: #2F6B4F;
+  --warn: #A3542A;
+
+  /* Typography & Geometry */
+  --fs-ui: max(11px, 0.6875rem);
+  --fs-brand: max(11px, 0.75rem);
+  --radius-sm: 0.375rem;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --dur-1: 180ms;
+  --dur-2: 360ms;
+  --dur-3: 600ms;
+
+  /* Fonts */
+  --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@theme {
+  --color-bg: #FFFFFF;
+  --color-paper: #F7F3EC;
+  --color-ink: #0B0B0A;
+  --color-ink-2: #5E5A55;
+  --color-line: #E6E1D8;
+  --color-gold: #B08A3E;
+  --color-ok: #2F6B4F;
+  --color-warn: #A3542A;
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  font-size: clamp(11px, 0.833vw, 16px);
+  background-color: var(--bg);
+  color: var(--ink);
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* UI labels: uppercase, weight 700, --fs-ui, letter-spacing 0.02em */
+.ui-label,
+[data-ui-label] {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: var(--fs-ui);
+  letter-spacing: 0.02em;
+}
+
+/* Headings: weight 500, letter-spacing -0.01em */
+h1, h2, h3, h4, h5, h6,
+.heading {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Numbers: tabular-nums */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Serif font helper with italic default */
+.font-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* Focus rings: 2px --gold outline, offset 3px */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

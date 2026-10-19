@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-10-16T08:36:44.180Z",
+  "request": {},
+  "response": {
+    "status": 500,
+    "data": {
+      "error": "Task creation failed: {\"status\":400,\"error\":\"negative_prompt is shorter than the minimum allowed length.\",\"error_code\":\"InvalidParameters\"}"
+    }
+  },
+  "elapsedSeconds": 0
+}

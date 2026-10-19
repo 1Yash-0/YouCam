@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-10-16T08:32:19.658Z",
+  "request": {
+    "src_file_id": "kr5KvRjceIBnoxbstIUWZKP1eyxy8VtwKtViAEuNNjcLbKfeLEmuXUa9yH4wuc2K",
+    "ref_file_ids": [
+      "KZTvsDUIWg0NN6wCebr8J6VjEie5C8sM8QPIQ3ryrpILbKfeLEmuXUa9yH4wuc2K",
+      "KZTvsDUIWg0NN6wCebr8J6VjEie5C8sM8QPIQ3ryrpILbKfeLEmuXUa9yH4wuc2K"
+    ],
+    "source_info": {
+      "name": "gen_face.png"
+    },
+    "object_infos": [
+      {
+        "name": "gen_earring.png",
+        "parameter": {
+          "earring_need_remove_background": true,
+          "earring_wearing_location": [
+            375,
+            660
+          ],
+          "earring_scale": 1,
+          "earring_is_right_ear": true,
+          "earring_occluded_type": 0,
+          "earring_shadow_intensity": 0.5,
+          "earring_ambient_light_intensity": 0.5
+        }
+      },
+      {
+        "name": "gen_earring.png",
+        "parameter": {
+          "earring_need_remove_background": true,
+          "earring_wearing_location": [
+            372,
+            620
+          ],
+          "earring_scale": 2,
+          "earring_is_right_ear": true,
+          "earring_occluded_type": 0,
+          "earring_shadow_intensity": 0.5,
+          "earring_ambient_light_intensity": 0.5
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 500,
+    "data": {
+      "error": "Task kr5KvRjceIBnoxbstIUWZKP1eyxy8VtwKtViAEuNNjf1y8BXalMoDyWEX4SNT7JUrsVEnq3ffBAO2Lf_ZLul6Q timed out after 60 seconds"
+    }
+  },
+  "elapsedSeconds": 0
+}

@@ -1,0 +1,16 @@
+{
+  "request": {
+    "src_file_id": "+7pWev5gjUzBwNy7zyxIuC9yGD6+2BeCp8sx11KDsjgLbKfeLEmuXUa9yH4wuc2K"
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "error": "error_face_angle_downward",
+      "error_message": "The face is tilted too far downward for accurate analysis. Slightly tilt head upwards and try again.",
+      "results": null,
+      "task_status": "error"
+    }
+  },
+  "taskId": "-7pWev5gjUzBwNy7zyxIuC9yGD6-2BeCp8sx11KDsjiLJyDSHfxJynPmHos96qLvaWDS9eILM6KP1umZGeEfHw",
+  "elapsedSeconds": 6.929
+}

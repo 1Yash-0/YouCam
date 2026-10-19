@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-10-16T08:47:23.721Z",
+  "request": {
+    "src_file_id": "Uq6UKZAIv0FJztDX5gm18emessDZVpI89iwMsynuuO0LbKfeLEmuXUa9yH4wuc2K",
+    "ref_file_ids": [
+      "bd/UXS+OOA4+CKzUwn1w6WFASGGufhWEyjYEafPlPuILbKfeLEmuXUa9yH4wuc2K"
+    ],
+    "source_info": {
+      "name": "p3-lipstick-result.jpg"
+    },
+    "object_infos": [
+      {
+        "name": "gen_earring.png",
+        "parameter": {
+          "earring_need_remove_background": true,
+          "earring_wearing_location": [
+            375,
+            660
+          ],
+          "earring_scale": 3,
+          "earring_is_right_ear": true,
+          "earring_occluded_type": 0,
+          "earring_shadow_intensity": 0.5,
+          "earring_ambient_light_intensity": 0.5
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "status": 200,
+      "data": {
+        "error": null,
+        "results": {
+          "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122546836706/v2/aeMNNB0KmUIP8rnQ996tC5Q/dabcb8cf-99c3-420a-b2bb-3eb1f404f5b6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261016T084723Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261016%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=f662a7f1c7c65d579afa50e7a8f4895f361b68efc611e293d06f80bc80d3d225"
+        },
+        "task_status": "success"
+      }
+    }
+  },
+  "elapsedSeconds": 6.951
+}

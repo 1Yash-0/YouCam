@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-16T08:46:16.108Z",
+  "request": {
+    "model": "youcam-image-v2",
+    "prompt": "product photo of a single emerald green silk blouse with a round neckline, front view, laid flat, centred, plain white background",
+    "negative_prompt": "blurry, low quality, distorted, watermark, text",
+    "size": "1328*1328",
+    "prompt_extend": true
+  },
+  "response": {
+    "status": 200,
+    "data": {
+      "status": 200,
+      "data": {
+        "error": null,
+        "results": {
+          "url": "https://yce-us.s3-accelerate.amazonaws.com/ttl30/513773588512245024/122546745899/v2/aeMNNB0KmUIP8rnQ996tC5Q/3c5b2b78-1c4a-48fc-857a-3faa393762b2.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261016T084559Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIARB77EV5Y5D7DAE3S%2F20261016%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=cfcec0ea741a0e9637fe41e3e2793113f787854608b41b609e13f4251f636b33"
+        },
+        "task_status": "success"
+      }
+    }
+  },
+  "elapsedSeconds": 13.97
+}
