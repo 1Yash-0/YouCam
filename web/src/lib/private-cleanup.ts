@@ -36,6 +36,22 @@ async function deleteKey(storage: StorageInstance, key: string) {
   await storage.delete(key)
 }
 
+/** Read many JSON records concurrently (bounded). Each read is a network round trip on cloud storage. */
+async function readAll<T>(storage: StorageInstance, keys: string[], limit = 16): Promise<Array<{ key: string; value: T | null }>> {
+  const out: Array<{ key: string; value: T | null }> = new Array(keys.length)
+  let next = 0
+  const worker = async () => { while (next < keys.length) { const i = next++; out[i] = { key: keys[i], value: await storage.getJson<T>(keys[i]) } } }
+  await Promise.all(Array.from({ length: Math.min(limit, keys.length) }, worker))
+  return out
+}
+
+/** Delete many keys concurrently (bounded). */
+async function deleteAll(storage: StorageInstance, keys: string[], limit = 16) {
+  let next = 0
+  const worker = async () => { while (next < keys.length) { const i = next++; await deleteKey(storage, keys[i]) } }
+  await Promise.all(Array.from({ length: Math.min(limit, keys.length) }, worker))
+}
+
 async function removePhoto(deps: PrivateCleanupDeps, photoId: string, options: { ownerId?: string; allowExpired: boolean; forceActive: boolean }) {
   const { storage } = deps
   await withPhotoLock(storage, photoId, async () => {
@@ -59,23 +75,17 @@ async function removePhoto(deps: PrivateCleanupDeps, photoId: string, options: {
     const requestIndexKeys = await jsonFiles(storage, requestIndex)
     // The private index is written after the authoritative record, so a crash can
     // leave a job without an index. Union both sources, but only select records
-    // whose originalPhotoId points at this photo.
+    // whose originalPhotoId points at this photo. All job records are read once, concurrently.
+    const allJobs = (await readAll<PipelineJobRecord>(storage, await jsonFiles(storage, 'meta/pipeline-jobs/'))).map(r => r.value).filter((r): r is PipelineJobRecord => Boolean(r?.jobId))
     const jobsById = new Map<string, PipelineJobRecord>()
-    for (const key of await jsonFiles(storage, 'meta/pipeline-jobs/')) {
-      const record = await storage.getJson<PipelineJobRecord>(key)
-      if (record?.jobId && record.originalPhotoId === photoId) jobsById.set(record.jobId, record)
-    }
+    for (const record of allJobs) if (record.originalPhotoId === photoId) jobsById.set(record.jobId, record)
     const jobs = [...jobsById].map(([id, record]) => ({ id, record }))
     if (!options.forceActive && jobs.some(({ record }) => record && isActive(record))) {
       throw new AppError('PHOTO_IN_USE', 'This photo is still being processed. Please wait for the preview to finish before deleting it.', 409)
     }
 
     const deletingJobIds = new Set(jobs.map(({ id }) => id))
-    const otherJobs: PipelineJobRecord[] = []
-    for (const key of await jsonFiles(storage, 'meta/pipeline-jobs/')) {
-      const record = await storage.getJson<PipelineJobRecord>(key)
-      if (record && !deletingJobIds.has(record.jobId)) otherJobs.push(record)
-    }
+    const otherJobs = allJobs.filter(record => !deletingJobIds.has(record.jobId))
     const retainedCacheKeys = new Set<string>()
     const retainedFileIds = new Set<string>()
     for (const job of otherJobs) {
@@ -103,43 +113,22 @@ async function removePhoto(deps: PrivateCleanupDeps, photoId: string, options: {
     // Result metadata is authoritative and is also persisted before its private
     // index, so account for orphaned records left by a crash in that gap.
     const resultsToDelete = new Set<string>()
-    for (const key of await jsonFiles(storage, 'meta/results/')) {
-      const resultKey = key.split('/').pop()?.replace(/\.json$/, '')
-      if (!resultKey || !/^[a-f0-9]{64}$/.test(resultKey)) continue
-      const resultMeta = await storage.getJson<{ photoId?: string }>(key)
-      if (resultMeta?.photoId === photoId) resultsToDelete.add(resultKey)
+    const resultMetaKeys = (await jsonFiles(storage, 'meta/results/')).filter(key => /^[a-f0-9]{64}$/.test(key.split('/').pop()?.replace(/\.json$/, '') ?? ''))
+    for (const { key, value } of await readAll<{ photoId?: string }>(storage, resultMetaKeys)) {
+      if (value?.photoId === photoId) resultsToDelete.add(key.split('/').pop()!.replace(/\.json$/, ''))
     }
-    for (const key of resultIndexKeys) {
-      const indexed = await storage.getJson<{ key?: string }>(key)
-      if (!indexed?.key || !/^[a-f0-9]{64}$/.test(indexed.key)) continue
-      const resultMeta = await storage.getJson<{ photoId?: string }>(storage.resultMetaPath(indexed.key))
-      if (resultMeta?.photoId === photoId) resultsToDelete.add(indexed.key)
+    const indexed = (await readAll<{ key?: string }>(storage, resultIndexKeys)).map(r => r.value?.key).filter((k): k is string => Boolean(k && /^[a-f0-9]{64}$/.test(k)) && !resultsToDelete.has(k!))
+    for (const { key, value } of await readAll<{ photoId?: string }>(storage, indexed.map(k => storage.resultMetaPath(k)))) {
+      if (value?.photoId === photoId) resultsToDelete.add(key.split('/').pop()!.replace(/\.json$/, ''))
     }
-    for (const resultKey of resultsToDelete) {
-      await deleteKey(storage, storage.resultPath(resultKey))
-      await deleteKey(storage, storage.resultMetaPath(resultKey))
-    }
-    for (const key of jobIndexKeys) await deleteKey(storage, key)
-    for (const key of resultIndexKeys) await deleteKey(storage, key)
-    for (const key of requestIndexKeys) await deleteKey(storage, key)
-
-    for (const { id, record } of jobs) {
-      await deleteKey(storage, storage.pipelineJobPath(id))
-      await deleteKey(storage, storage.jobPath(id))
-      await deleteKey(storage, storage.finalisedMarkerPath(id))
-      for (let index = 0; index < (record?.steps.length ?? 0); index++) {
-        await deleteKey(storage, storage.finalisedMarkerPath(`${id}-${index}`))
-      }
-    }
-
-    for (const key of cacheKeys) {
-      if (retainedCacheKeys.has(key)) continue
-      await deleteKey(storage, storage.stepCacheFilePath(key))
-      await deleteKey(storage, storage.stepCacheMetaPath(key))
-    }
-    for (const fileId of youCamFileIds) {
-      if (!retainedFileIds.has(fileId)) await deps.forgetFile(fileId)
-    }
+    await deleteAll(storage, [...resultsToDelete].flatMap(k => [storage.resultPath(k), storage.resultMetaPath(k)]))
+    await deleteAll(storage, [...jobIndexKeys, ...resultIndexKeys, ...requestIndexKeys])
+    await deleteAll(storage, jobs.flatMap(({ id, record }) => [
+      storage.pipelineJobPath(id), storage.jobPath(id), storage.finalisedMarkerPath(id),
+      ...Array.from({ length: record?.steps.length ?? 0 }, (_, index) => storage.finalisedMarkerPath(`${id}-${index}`)),
+    ]))
+    await deleteAll(storage, [...cacheKeys].filter(key => !retainedCacheKeys.has(key)).flatMap(key => [storage.stepCacheFilePath(key), storage.stepCacheMetaPath(key)]))
+    await Promise.all([...youCamFileIds].filter(id => !retainedFileIds.has(id)).map(id => deps.forgetFile(id)))
 
     await deleteKey(storage, storage.photoPath(photoId))
     await deleteKey(storage, storage.photoMetaPath(photoId))

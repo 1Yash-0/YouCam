@@ -12,6 +12,7 @@ import { Product } from '@/lib/products'
 import { getProductCapabilities } from '@/lib/product-capabilities'
 import { SAMPLE_RESULTS } from '@/lib/sample-catalogue'
 import { buildTryOnRequest } from '@/lib/tryon-request'
+import { detectIris } from '@/lib/iris-detect'
 import sampleFace from '../../data/sample-face.json'
 
 export const SAMPLE_PHOTO_ID = 'f813b0825ce8b5f0dd103b255ec7410af0c6a8003b8f4b92198de200696f3b9c'
@@ -112,6 +113,7 @@ export function useTryOn({ product, initialSizeCm }: UseTryOnProps) {
   const mounted = useRef(true)
   const pollingBusy = useRef(false)
   const submitBusy = useRef(false)
+  const autoSubmitRef = useRef(false)
   const hairTemplatesBusy = useRef(false)
   const attemptId = useRef<string | null>(null)
   const [sizeComparisons, setSizeComparisons] = useState<Array<{ sizeCm: number; imageUrl: string; measurement?: TryOnState['measurement'] }>>([])
@@ -263,16 +265,20 @@ export function useTryOn({ product, initialSizeCm }: UseTryOnProps) {
       }
 
       setSizeComparisons([])
+      const photoUrl = `/api/photo/${data.photoId}`
+      // Earrings: find the iris automatically; the manual scale step is only the fallback.
+      const found = capabilities.calibration ? await detectIris(photoUrl) : null
+      if (found) autoSubmitRef.current = true
       setState((prev) => ({
         ...prev,
         photoId: data.photoId,
-        photoUrl: `/api/photo/${data.photoId}`,
+        photoUrl,
         photoDimensions: { width: data.width, height: data.height },
         isSampleFace: false,
-        irisPx: SAMPLE_IRIS_PX,
+        irisPx: found?.irisPx ?? SAMPLE_IRIS_PX,
         irisMm: SAMPLE_IRIS_MM,
         ear: 'auto',
-        caliperCoords: { x: data.width * 0.5, y: data.height * 0.35 },
+        caliperCoords: found?.center ?? { x: data.width * 0.5, y: data.height * 0.35 },
         step: 'measure',
       }))
     } catch (err: any) {
@@ -626,6 +632,13 @@ export function useTryOn({ product, initialSizeCm }: UseTryOnProps) {
       extras: {},
     }))
   }, [resumeKey])
+
+  // The iris was found on upload: start the render straight away instead of asking for a manual scale.
+  useEffect(() => {
+    if (!autoSubmitRef.current || state.step !== 'measure' || !state.photoId || state.isSampleFace) return
+    autoSubmitRef.current = false
+    void submitTryOn()
+  }, [state.step, state.photoId, state.isSampleFace, submitTryOn])
 
   return {
     state,
