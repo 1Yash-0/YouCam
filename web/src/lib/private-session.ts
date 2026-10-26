@@ -47,6 +47,8 @@ export function assertOwned(resource: OwnedResource | null, ownerId: string) {
 }
 export function routeError(error: unknown) {
   if (error instanceof AppError) return NextResponse.json({ code: error.code, userMessage: error.userMessage || error.message }, { status: error.httpStatus })
+  // Server log only (Vercel function logs). Our own messages never contain request bodies or credentials.
+  console.error('[route error]', error instanceof Error ? `${error.name}: ${error.message}\n${error.stack?.split('\n').slice(1, 6).join('\n')}` : String(error))
   // Never send third-party request bodies or credentials to the client.
   return NextResponse.json({ code: ErrorCodes.INTERNAL_ERROR, userMessage: 'This request could not be completed. Please retry.' }, { status: 500 })
 }

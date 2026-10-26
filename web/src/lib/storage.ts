@@ -201,7 +201,12 @@ export class SupabaseStorageBackend implements DurableStorage {
   private objectUrl(key: string) { return `${this.baseUrl}/storage/v1/object/${this.objectBucket(key)}/${encodeStorageKey(key)}` }
   private async request(url: string, init: RequestInit = {}) {
     const response = await this.fetcher(url, { ...init, headers: { ...this.headers, ...(init.headers as Record<string, string> ?? {}) } })
-    if (!response.ok && response.status !== 404) throw new Error(`Supabase storage request failed (${response.status})`)
+    if (!response.ok && response.status !== 404) {
+      // Say which endpoint failed (path only, no query or body) so production logs are actionable.
+      const where = `${init.method ?? 'GET'} ${new URL(url).pathname.replace(/\/[a-f0-9]{64}(\.[a-z]+)?/g, '/<id>$1')}`
+      const why = (await response.text().catch(() => '')).replace(/eyJ[\w.-]+/g, '<redacted>').slice(0, 160)
+      throw new Error(`Supabase storage request failed (${response.status}) ${where} ${why}`)
+    }
     return response
   }
   /** Object reads: Supabase Storage answers a missing object with 400 (body "not_found") as well as 404. */
