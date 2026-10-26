@@ -611,6 +611,17 @@ export function useTryOn({ product, initialSizeCm }: UseTryOnProps) {
     setStep('measure')
   }, [state.ear, setStep])
 
+  /** Stop waiting for a render. The provider task was already submitted, so its unit is still spent. */
+  const cancelRender = useCallback(() => {
+    pollGeneration.current++
+    attemptId.current = null
+    if (pollingRef.current) clearInterval(pollingRef.current)
+    sessionStorage.removeItem(resumeKey)
+    submitBusy.current = false
+    setIsSubmitting(false)
+    setState((prev) => ({ ...prev, step: prev.resultImageUrl ? 'result' : 'measure', jobId: null, isPresetRendering: false, error: null }))
+  }, [resumeKey])
+
   const reupload = useCallback(() => {
     pollGeneration.current++
     attemptId.current = null
@@ -641,6 +652,7 @@ export function useTryOn({ product, initialSizeCm }: UseTryOnProps) {
   }, [state.step, state.photoId, state.isSampleFace, submitTryOn])
 
   return {
+    cancelRender,
     state,
     sizeComparisons,
     compareSize,

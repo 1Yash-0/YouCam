@@ -143,6 +143,8 @@ export interface ProcessingStepProps {
   progress: number
   currentCopy: string
   userPhotoUrl?: string | null
+  /** Stop waiting for this render. The unit for an already-submitted render is still used. */
+  onCancel?: () => void
 }
 
 export interface MeasuringRulerOverlayProps {
