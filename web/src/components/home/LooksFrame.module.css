@@ -1,0 +1,163 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160px 32px;
+}
+
+.heading {
+  width: 100%;
+  margin: 0 0 48px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 4.4vw, 68px);
+  line-height: 1;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* The frame, caption and progress share one centred column. */
+.column {
+  width: min(40vw, 520px);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: clip;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.frame:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.imageActive {
+  opacity: 1;
+}
+
+/* Two lines share one clipped slot: the outgoing caption slides up and out, the incoming one rises in. */
+.caption {
+  position: relative;
+  height: 24px;
+  margin: 16px 0 0;
+  overflow: clip;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.captionLine {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.captionIn {
+  animation: caption-in 450ms var(--ease-expo) both;
+}
+
+.captionOut {
+  animation: caption-out 450ms var(--ease-expo) both;
+}
+
+@keyframes caption-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes caption-out {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.segment {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 2px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform-origin: 0 50%;
+}
+
+.fillDone {
+  transform: scaleX(1);
+}
+
+/* The active segment fills over the 3200 ms auto-advance interval. Its animationend moves to the next look. */
+.fillRun {
+  transform: scaleX(0);
+  animation: fill-run 3200ms linear forwards;
+}
+
+@keyframes fill-run {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 899px) {
+  .section {
+    padding: 96px 16px;
+  }
+
+  .column {
+    width: min(82vw, 520px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .captionIn,
+  .captionOut {
+    animation: none;
+  }
+
+  .captionOut {
+    display: none;
+  }
+}

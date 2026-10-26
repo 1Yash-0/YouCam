@@ -1,0 +1,50 @@
+[
+  {
+    "id": "brick-red",
+    "name": "brick red",
+    "hex": "#A23B2A",
+    "texture": "matte"
+  },
+  {
+    "id": "blue-red",
+    "name": "blue red",
+    "hex": "#A1001E",
+    "texture": "matte"
+  },
+  {
+    "id": "true-red",
+    "name": "true red",
+    "hex": "#C1121F",
+    "texture": "satin"
+  },
+  {
+    "id": "berry",
+    "name": "berry",
+    "hex": "#7B1E3A",
+    "texture": "satin"
+  },
+  {
+    "id": "rose",
+    "name": "rose",
+    "hex": "#C06C84",
+    "texture": "satin"
+  },
+  {
+    "id": "nude-pink",
+    "name": "nude pink",
+    "hex": "#D8A1A4",
+    "texture": "satin"
+  },
+  {
+    "id": "nude-caramel",
+    "name": "nude caramel",
+    "hex": "#B07D62",
+    "texture": "matte"
+  },
+  {
+    "id": "terracotta",
+    "name": "terracotta",
+    "hex": "#B5562F",
+    "texture": "matte"
+  }
+]

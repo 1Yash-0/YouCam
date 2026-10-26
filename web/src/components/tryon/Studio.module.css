@@ -1,0 +1,50 @@
+/* Rendering shimmer over the photo: one light bar sweeps across. Solid colour, no gradient. */
+.shimmer {
+  position: absolute;
+  inset: 0 0 52px 0;
+  z-index: 20;
+  overflow: clip;
+  pointer-events: none;
+}
+
+.shimmer > span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 30%;
+  background: rgba(255, 255, 255, 0.35);
+  animation: sweep 1.2s linear infinite;
+}
+
+@keyframes sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(400%); }
+}
+
+/* The primary decision stays in reach on phones. */
+.decision {
+  position: sticky;
+  bottom: 0;
+  z-index: 15;
+  margin: 0 -24px;
+  padding: 12px 24px;
+  background: var(--paper);
+}
+
+@media (min-width: 1024px) {
+  .decision {
+    position: static;
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer > span {
+    animation: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+  }
+}

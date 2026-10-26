@@ -1,0 +1,141 @@
+/* Gold ruler size control. --at is the selected tick's position, 0..1 along the track. */
+.ruler {
+  position: relative;
+  padding: 18px 14px 0;
+  max-width: 520px;
+}
+
+.track {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 30px;
+  height: 2px;
+  background: var(--line);
+}
+
+.disc {
+  position: absolute;
+  top: 17px;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  /* left edge of the track + --at of its length, centred on the tick */
+  transform: translateX(calc(var(--at) * (100cqw - 28px)));
+  transition: transform 300ms var(--ease-out);
+  pointer-events: none;
+}
+
+.ruler {
+  container-type: inline-size;
+}
+
+.ticks {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  min-width: 44px;
+  padding: 0;
+  margin: 0 -8px;
+  background: none;
+  border: 0;
+  color: var(--ink-2);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tick[aria-pressed='true'] {
+  color: var(--ink);
+}
+
+.tick:disabled {
+  cursor: default;
+}
+
+.mark {
+  width: 2px;
+  height: 14px;
+  background: var(--gold);
+}
+
+/* No render yet for this size: an open circle sits on the track instead of a tick. */
+.markOpen {
+  width: 10px;
+  height: 10px;
+  margin: 2px 0;
+  border-radius: 50%;
+  border: 2px solid var(--ink-2);
+  background: var(--bg);
+}
+
+.tick:disabled .label {
+  color: var(--ink-2);
+}
+
+.label {
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tick:hover:not(:disabled) .label,
+.tick:focus-visible .label {
+  color: var(--ink);
+}
+
+/* Progress cue */
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+}
+
+.segments {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.segment {
+  width: 40px;
+  height: 2px;
+  background: var(--line);
+  transition: background-color 300ms var(--ease-out);
+}
+
+.segment[data-state='done'],
+.segment[data-state='current'] {
+  background: var(--gold);
+}
+
+.stepName {
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disc,
+  .segment {
+    transition: none;
+  }
+}

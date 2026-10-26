@@ -1,0 +1,109 @@
+[
+  {
+    "id": "single-teardrop-3cm",
+    "title": "Single Teardrop (3 cm)",
+    "flow": "single-earring",
+    "productId": "gilded-teardrop",
+    "sizeCm": 3,
+    "steps": [
+      "upload",
+      "detect",
+      "tryon"
+    ],
+    "imagePath": "single-teardrop-3cm.png"
+  },
+  {
+    "id": "earring-6cm",
+    "title": "Gilded Teardrop (6 cm)",
+    "flow": "single-earring",
+    "productId": "gilded-teardrop",
+    "sizeCm": 6,
+    "steps": [
+      "upload",
+      "detect",
+      "tryon"
+    ],
+    "imagePath": "earring-6cm.png"
+  },
+  {
+    "id": "lipstick-earring-chain",
+    "title": "Lipstick + Earring Chaining",
+    "flow": "multi-step",
+    "productId": "gilded-teardrop",
+    "sizeCm": 3,
+    "steps": [
+      "upload",
+      "lipstick",
+      "detect",
+      "tryon"
+    ],
+    "imagePath": "lipstick-earring-chain.png"
+  },
+  {
+    "id": "stud-drop-stack",
+    "title": "Stud + Drop Stack",
+    "flow": "stack",
+    "productId": "dot-stud",
+    "sizeCm": 0.6,
+    "stack": [
+      "gilded-teardrop"
+    ],
+    "steps": [
+      "upload",
+      "detect",
+      "stack-tryon"
+    ],
+    "imagePath": "stud-drop-stack.png"
+  },
+  {
+    "id": "hair-braids-earring",
+    "title": "Hair Braids + Earring",
+    "flow": "multi-step",
+    "productId": "gilded-teardrop",
+    "sizeCm": 3,
+    "steps": [
+      "upload",
+      "hair",
+      "detect",
+      "tryon"
+    ],
+    "imagePath": "hair-braids-earring.png"
+  },
+  {
+    "id": "necklace",
+    "title": "Necklace Try-on",
+    "flow": "necklace",
+    "productId": "orb-chain",
+    "steps": [
+      "upload",
+      "detect-neck",
+      "tryon"
+    ],
+    "imagePath": "necklace.png"
+  },
+  {
+    "id": "outfit",
+    "title": "Outfit Try-on",
+    "flow": "outfit",
+    "productId": "emerald-blouse",
+    "steps": [
+      "upload",
+      "detect-body",
+      "tryon"
+    ],
+    "imagePath": "outfit.jpg"
+  },
+  {
+    "id": "dot-stud-0.6cm",
+    "title": "Dot Stud (0.6 cm)",
+    "flow": "single-earring",
+    "productId": "dot-stud",
+    "sizeCm": 0.6,
+    "steps": [
+      "upload",
+      "detect",
+      "tryon"
+    ],
+    "imagePath": "dot-stud-0.6cm.png"
+  }
+]

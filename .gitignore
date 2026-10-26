@@ -1,0 +1,54 @@
+# Secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Dependencies and builds
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Runtime data (uploaded photos, cache, unit ledger)
+.data/
+
+# AI agent / editor tooling (not needed to run the app)
+.agents/
+.kiro/
+.vscode/
+.idea/
+
+# Local inspection and test artifacts
+inspection/
+test-results/
+playwright-report/
+
+# OS and logs
+.DS_Store
+Thumbs.db
+*.log
+
+# Review artefacts (probe renders, screenshots)
+outputs/
+.taste-skill/
+
+# Internal notes and dev-only tooling: kept locally, not published
+*.md
+!README.md
+web/README.md
+docs/
+/scripts/
+/.env.example
+web/scripts/probes/
+web/scripts/catalogue/
+web/scripts/challenger-m3-stress.mjs
+web/scripts/contact-sheet.mjs
+web/scripts/cutout-products.mjs
+web/scripts/measure-iris.mjs
+web/scripts/measure-offline.mjs
+web/scripts/prepare-hero-assets.mjs
+web/scripts/render-hero-real.mjs
+web/scripts/repair-dot-stud-preview.mjs
+web/scripts/repair-pendant-preview.mjs

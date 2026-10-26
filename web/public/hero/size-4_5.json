@@ -1,0 +1,11 @@
+{
+  "sizeCm": 4.5,
+  "imageUrl": "/hero/size-4_5.webp",
+  "box": {
+    "x": 346,
+    "y": 656,
+    "w": 63,
+    "h": 154,
+    "pixels": 4794
+  }
+}

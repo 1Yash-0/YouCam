@@ -1,0 +1,346 @@
+@import "tailwindcss";
+
+:root {
+  /* Palette */
+  --bg: #FFFFFF;
+  --paper: #F7F3EC;
+  --ink: #0B0B0A;
+  --ink-2: #5E5A55;
+  --line: #E6E1D8;
+  --gold: #B08A3E;
+  --ok: #2F6B4F;
+  --warn: #A3542A;
+
+  /* Typography & Geometry */
+  --fs-ui: max(14px, 0.875rem);
+  --fs-brand: max(14px, 0.875rem);
+  --radius-sm: 0.375rem;
+  --radius-pill: 999px;
+  --header-h: 72px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --dur-1: 180ms;
+  --dur-2: 360ms;
+  --dur-3: 600ms;
+
+  /* Motion tokens: easing curves and durations shared by the chrome, cards and collection. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+  --t-reveal: 800ms;
+
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.56; }
+  50% { opacity: 0.82; }
+}
+
+.skeleton {
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    opacity: 0.68;
+  }
+}
+
+@theme inline {
+  --color-bg: #FFFFFF;
+  --color-paper: #F7F3EC;
+  --color-ink: #0B0B0A;
+  --color-ink-2: #5E5A55;
+  --color-line: #E6E1D8;
+  --color-gold: #B08A3E;
+  --color-ok: #2F6B4F;
+  --color-warn: #A3542A;
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  font-size: clamp(16px, 1.111vw, 18px);
+  background-color: var(--bg);
+  color: var(--ink);
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: auto;
+}
+
+
+/* The complete source photographs remain the measuring surface. */
+.hero-ruler { background: var(--paper); color: var(--ink); }
+.hero-intro { max-width:1600px; margin-inline:auto; padding:44px 24px 32px; display:grid; gap:28px; align-items:end; }
+.hero-intro h1 { margin:0; font-size:clamp(44px,6.2vw,88px); max-width:15ch; letter-spacing:-.035em; }
+.hero-line-mask { display:block; overflow:hidden; padding-bottom:.1em; margin-bottom:-.06em; }
+.hero-line-mask > span { display:block; }
+.hero-intro-copy { max-width:26rem; padding-bottom:8px; }
+.hero-intro-copy p { font-size:18px; line-height:1.65; margin:0; }
+.hero-intro-actions { display:flex; flex-wrap:wrap; align-items:center; gap:24px; margin-top:24px; }
+.hero-ruler-gallery { background:var(--paper); padding-block:8px 24px; }
+.hero-gallery-space { max-width:1488px; margin-inline:auto; width:calc(100% - 48px); }
+.hero-ruler-composition { margin-inline:auto; width:100%; }
+.hero-gallery-heading { display:flex; min-height:44px; align-items:center; justify-content:space-between; gap:16px; font-size:13px; }
+.hero-gallery-heading p { margin:0; color:var(--ink-2); }
+.hero-gallery-heading button { min-height:44px; flex:none; }
+.hero-ruler-track { height:1px; background:var(--line); margin:8px 0 18px; overflow:hidden; }
+.hero-ruler-progress { display:block; width:100%; height:100%; background:var(--gold); transform-origin:left center; }
+.hero-ruler-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.hero-ruler-window { min-width:0; }
+.hero-ruler-photo { position:relative; display:block; width:100%; aspect-ratio:5/8; overflow:hidden; background:var(--line); }
+.hero-ruler-image { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; }
+.hero-image-error { position:absolute; inset:0; display:flex; align-items:center; padding:16px; font-size:14px; background:var(--paper); color:var(--ink-2); }
+.hero-scale { display:flex; gap:8px; align-items:center; height:16px; margin-top:10px; font-size:12px; color:var(--ink-2); }
+.hero-scale-bar { position:relative; display:block; height:1px; background:var(--gold); flex:none; transform-origin:left center; }
+.hero-scale-bar::before,.hero-scale-bar::after { content:''; position:absolute; top:-2px; width:1px; height:5px; background:var(--gold); }
+.hero-scale-bar::before { left:0; } .hero-scale-bar::after { right:0; }
+.hero-ruler-meta { display:grid; grid-template-columns:minmax(0,1fr); margin-top:8px; }
+.hero-ruler-meta > a { font-size:20px; line-height:1.15; display:flex; min-height:28px; align-items:center; }
+.hero-size-select { position:relative; display:block; min-width:0; }
+.hero-size-select select { appearance:none; width:100%; min-height:44px; padding:6px 20px 6px 0; background:transparent; border:0; border-bottom:1px solid var(--line); border-radius:0; font-family:var(--font-sans); font-size:14px; color:var(--ink); font-variant-numeric:tabular-nums; cursor:pointer; transition:border-color 200ms var(--ease); }
+.hero-size-select select:hover { border-color:var(--gold); }
+.hero-size-select svg { position:absolute; right:2px; top:18px; width:10px; height:7px; pointer-events:none; }
+.hero-gallery-foot { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px 20px; margin-top:16px; min-height:44px; font-size:13px; }
+.hero-gallery-foot > span { display:none; color:var(--ink-2); }
+.motion-link { text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:5px; transition:color 200ms var(--ease),text-decoration-color 200ms var(--ease); }
+.motion-link:hover { color:var(--ink-2); text-decoration-color:var(--ink); }
+@media (min-width:1024px) {
+  .hero-intro { grid-template-columns:1.25fr 1fr; gap:64px; padding:44px 56px 36px; }
+  .hero-intro-copy { justify-self:end; }
+  .hero-gallery-space { width:calc(100% - 112px); }
+  .hero-ruler-row { grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
+  .hero-ruler-meta { grid-template-columns:auto minmax(88px,1fr); align-items:center; gap:6px; }
+  .hero-size-select select { text-align:right; font-size:13px; }
+  .hero-gallery-foot > span { display:block; }
+}
+
+/* Shared controls keep the pointer and the product at rest. */
+.pill-control { position:relative; display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:10px 24px; border:2px solid var(--line); border-radius:0; font-size:16px; text-align:center; cursor:pointer; user-select:none; transition:background-color 200ms var(--ease),color 200ms var(--ease),border-color 200ms var(--ease),opacity 120ms var(--ease); }
+.pill-control:active:not(:disabled) { opacity:.72; transition-duration:120ms; }
+.pill-control:disabled { opacity:.4; cursor:not-allowed; }
+.pill-primary { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.pill-primary:hover:not(:disabled) { background:var(--ink-2); border-color:var(--ink-2); }
+.pill-secondary { background:transparent; color:var(--ink); }
+.pill-secondary:hover:not(:disabled) { background:var(--line); border-color:var(--ink-2); }
+.pill-gold { background:var(--gold); color:var(--ink); border-color:var(--gold); }
+.pill-gold:hover:not(:disabled) { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+
+
+
+/* The fixed site header owns this vertical space on every route. */
+.site-content {
+  padding-top: var(--header-h);
+}
+
+/* Natural-height hero content starts below the fixed header too. */
+.home-page {
+  margin-top: 0;
+}
+
+@media (max-width: 899px) {
+  :root {
+    --header-h: 60px;
+  }
+}
+
+/* UI labels: uppercase, weight 700, --fs-ui, letter-spacing 0.02em */
+/* Interface labels: sentence case at a readable size (house style: no tracked uppercase). */
+.ui-label,
+[data-ui-label] {
+  text-transform: none;
+  font-weight: 500;
+  font-size: max(var(--fs-ui), 15px);
+  letter-spacing: 0;
+}
+
+/* Headings: Gloock display voice with compact editorial metrics */
+h1, h2, h3,
+.heading,
+.font-display,
+.font-serif {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em !important;
+  line-height: 1 !important;
+}
+
+/* Numbers: tabular-nums */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-style: normal;
+}
+
+/* Focus rings: 2px --gold outline, offset 3px */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@keyframes hero-odometer {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes hero-caption {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.studio-primary { display:inline-flex; justify-content:center; align-items:center; padding: .85rem 1.5rem; background:var(--ink); color:var(--paper); border:1px solid var(--ink); transition:background 180ms ease; }
+.studio-primary:hover { background:var(--ink-2); border-color:var(--ink-2); }
+.studio-primary:active:not(:disabled) { opacity:.72; transition:opacity 120ms var(--ease); }
+.studio-primary:disabled { opacity:.45; cursor:wait; }
+.tryon-studio :focus-visible { outline:2px solid var(--gold); outline-offset:4px; }
+.tryon-studio [aria-current="step"] { color:var(--gold); font-weight:600; }
+.tryon-studio button[aria-pressed] { transition:background-color 200ms var(--ease),color 200ms var(--ease),border-color 200ms var(--ease),opacity 120ms var(--ease); }
+.tryon-studio button[aria-pressed]:active:not(:disabled) { opacity:.72; }
+.tryon-studio .calibration-layout { display:grid; grid-template-columns:minmax(0,2fr) minmax(280px,1fr); }
+@media (max-width:767px) { .tryon-studio .calibration-layout { display:flex; flex-direction:column; } }
+@media (prefers-reduced-motion:reduce) { .studio-primary { transition:none; } }
+
+@media (prefers-reduced-motion:reduce) {
+  .pill-control,.motion-link,.hero-size-select select { transition-duration:150ms; }
+}
+
+
+/* ---- Motion and interaction: shop chrome, product cards and collection ---- */
+
+/* Press feedback. The transition lives in the base layer so Tailwind transition utilities still win. */
+@layer base {
+  :where(button, a.btn, [data-press]) {
+    transition: transform var(--t-press) var(--ease-out);
+  }
+}
+
+:where(button, a.btn, [data-press]):active {
+  transform: scale(0.97);
+}
+
+/* Underline that draws in from the left on hover or keyboard focus. */
+.link-draw {
+  position: relative;
+}
+
+.link-draw::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.3em;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-ui) var(--ease-out);
+  pointer-events: none;
+}
+
+.link-draw:hover::after,
+.link-draw:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* The current page is marked by a gold bar instead of the drawn underline. */
+.link-draw[aria-current='page']::after {
+  background: var(--gold);
+  transform: scaleX(1);
+}
+
+/* Lenis smooth scroll: the document keeps its natural height and native scroll stays in charge. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Product cards: the cut-out crossfades to the worn render, which settles from 1.04 to 1. */
+.product-cutout {
+  transition: opacity 300ms ease;
+}
+
+.product-worn {
+  transition: opacity 300ms ease, transform 600ms var(--ease-expo);
+}
+
+.try-reveal {
+  transition: opacity var(--t-ui) var(--ease-out);
+}
+
+/* Collection: cards rise in once, with a 60 ms stagger, when the grid first comes into view. */
+.product-grid[data-reveal='armed'] .product-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.product-grid[data-reveal='shown'] .product-reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 700ms var(--ease-expo), transform 700ms var(--ease-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Opacity fades keep their timing under reduced motion; movement is effectively instant. */
+  .product-cutout {
+    transition-duration: 300ms !important;
+  }
+
+  .product-worn {
+    transition-duration: 300ms, 1ms !important;
+  }
+
+  .try-reveal {
+    transition-duration: var(--t-ui) !important;
+  }
+
+  .product-grid[data-reveal] .product-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none !important;
+  }
+}

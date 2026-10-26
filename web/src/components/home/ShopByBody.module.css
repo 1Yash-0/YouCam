@@ -1,0 +1,311 @@
+.section {
+  padding: 160px 32px;
+}
+
+.inner {
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.heading {
+  margin: 0 0 56px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 4.4vw, 68px);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Sticky needs align-self: start, or the column stretches to the grid row and has nowhere to move.
+   The container lets the frame size itself against the column (cqw units), so it never overflows. */
+.visual {
+  position: sticky;
+  top: calc(var(--header-h) + 6vh);
+  align-self: start;
+  container-type: inline-size;
+}
+
+/* A 4:5 frame. Its height is capped by the viewport (so the frame and its caption fit beneath the header)
+   and by 640 px. 125cqw is 1.25 times the column width, which keeps the ratio on narrow desktops.
+   The width comes from the height. */
+.frame {
+  --frame-h: min(calc(100svh - var(--header-h) - 200px), 640px, 125cqw);
+  position: relative;
+  overflow: clip;
+  aspect-ratio: 4 / 5;
+  height: var(--frame-h);
+  width: calc(var(--frame-h) * 0.8);
+  background: var(--paper);
+}
+
+.stack {
+  position: absolute;
+  inset: 0;
+  animation: stack-in 400ms var(--ease-out) both;
+}
+
+@keyframes stack-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 300ms ease, transform 600ms var(--ease-expo);
+}
+
+.imageActive {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.caption {
+  margin: 16px 0 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.captionMeta {
+  color: var(--ink-2);
+}
+
+.panel {
+  min-width: 0;
+}
+
+.tabs {
+  position: relative;
+  display: flex;
+  gap: 28px;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: flex-end;
+  min-height: 44px;
+  padding: 0 0 8px;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  font-family: inherit;
+  font-size: 17px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tabActive {
+  color: var(--ink);
+}
+
+/* Moved with transform from the measured offsets of the selected tab. The element is 1px wide and scaled to the tab. */
+.bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 2px;
+  background: var(--gold);
+  transform-origin: 0 50%;
+  transition: transform 400ms var(--ease-expo);
+}
+
+/* Rows sit 16 px apart. The list starts at the top of the panel, level with the top of the photo. */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+}
+
+.item + .item {
+  margin-top: 16px;
+}
+
+.row {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 72px;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+/* The paper background fades with opacity, so the row never animates a colour. */
+.row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--paper);
+  opacity: 0;
+  transition: opacity 220ms var(--ease-out);
+}
+
+.rowActive::before {
+  opacity: 1;
+}
+
+.name {
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  column-gap: 16px;
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: right;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.price {
+  white-space: nowrap;
+}
+
+/* grid-template-rows is the accepted exception to the transform/opacity-only rule: it opens the actions without measuring. */
+.expander {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.expanderOpen {
+  grid-template-rows: 1fr;
+}
+
+.expanderInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  padding: 8px 16px 20px;
+}
+
+.tryOn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 16px;
+  line-height: 1;
+  transition: opacity 180ms var(--ease-out);
+}
+
+.tryOn:hover {
+  opacity: 0.86;
+}
+
+.details {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 32px;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.tab:focus-visible,
+.row:focus-visible,
+.tryOn:focus-visible,
+.details:focus-visible,
+.more:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 899px) {
+  .section {
+    padding: 96px 16px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .visual {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 2;
+    background: var(--bg);
+  }
+
+  .frame {
+    width: 100%;
+    aspect-ratio: auto;
+    height: 38svh;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack {
+    animation: none;
+  }
+
+  .image,
+  .imageActive {
+    transform: none;
+  }
+
+  .image {
+    transition: opacity 300ms ease;
+  }
+
+  .bar,
+  .expander {
+    transition: none;
+  }
+}
