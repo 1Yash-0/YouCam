@@ -204,8 +204,18 @@ export class SupabaseStorageBackend implements DurableStorage {
     if (!response.ok && response.status !== 404) throw new Error(`Supabase storage request failed (${response.status})`)
     return response
   }
+  /** Object reads: Supabase Storage answers a missing object with 400 (body "not_found") as well as 404. */
+  private async objectRequest(url: string, init: RequestInit = {}) {
+    const response = await this.fetcher(url, { ...init, headers: { ...this.headers, ...(init.headers as Record<string, string> ?? {}) } })
+    if (response.ok || response.status === 404) return { response, missing: response.status === 404 }
+    if (response.status === 400) {
+      const text = init.method === 'HEAD' ? '' : await response.text().catch(() => '')
+      if (init.method === 'HEAD' || /not.?found|404/i.test(text)) return { response, missing: true }
+    }
+    throw new Error(`Supabase storage request failed (${response.status})`)
+  }
   async putFile(key: string, data: Buffer) { await this.request(this.objectUrl(key), { method: 'POST', headers: { 'Content-Type': 'application/octet-stream', 'x-upsert': 'true' }, body: new Uint8Array(data) }) }
-  async getFile(key: string) { const response = await this.request(this.objectUrl(key)); return response.status === 404 ? null : Buffer.from(await response.arrayBuffer()) }
+  async getFile(key: string) { const { response, missing } = await this.objectRequest(this.objectUrl(key)); return missing ? null : Buffer.from(await response.arrayBuffer()) }
   async putJson(key: string, data: unknown) {
     await this.request(`${this.baseUrl}/rest/v1/darpan_state?on_conflict=key`, { method: 'POST', headers: { 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify({ key, value: data, updated_at: new Date().toISOString() }) })
   }
@@ -216,8 +226,8 @@ export class SupabaseStorageBackend implements DurableStorage {
     return rows[0]?.value ?? null
   }
   async exists(key: string) {
-    const response = await this.request(this.objectUrl(key), { method: 'HEAD' })
-    if (response.status !== 404) return true
+    const { missing } = await this.objectRequest(this.objectUrl(key), { method: 'HEAD' })
+    if (!missing) return true
     return (await this.getJson(key)) !== null
   }
   async delete(key: string) {

@@ -38,6 +38,24 @@ describe('Supabase storage backend', () => {
     expect(await storage.list('photos')).toEqual(['photos/one.png', 'photos/two.png'])
   })
 
+  it('treats Supabase 400 not-found answers for missing objects as missing (seen in production)', async () => {
+    const fetcher = vi.fn(async (input: string | URL | Request, init?: RequestInit) => {
+      const url = String(input)
+      if (url.includes('/rest/v1/darpan_state')) return Response.json([])
+      if (init?.method === 'HEAD') return new Response(null, { status: 400 })
+      return new Response(JSON.stringify({ statusCode: '404', error: 'not_found', message: 'Object not found' }), { status: 400 })
+    }) as typeof fetch
+    const storage = new SupabaseStorageBackend({ url: 'https://demo.supabase.co', serviceRoleKey: 'key', fetcher })
+    expect(await storage.exists('results/missing.png')).toBe(false)
+    expect(await storage.getFile('results/missing.png')).toBeNull()
+  })
+
+  it('still fails loudly on other 400 errors when reading an object', async () => {
+    const fetcher = vi.fn(async () => new Response(JSON.stringify({ error: 'invalid_jwt' }), { status: 400 })) as typeof fetch
+    const storage = new SupabaseStorageBackend({ url: 'https://demo.supabase.co', serviceRoleKey: 'key', fetcher })
+    await expect(storage.getFile('results/x.png')).rejects.toThrow(/400/)
+  })
+
   it('lists nested object files and paginates state records without treating folders as files', async () => {
     const urls: string[] = []
     const fetcher = vi.fn(async (input: string | URL | Request, init?: RequestInit) => {
