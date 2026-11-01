@@ -4,6 +4,7 @@ import { Header } from '@/components/Header'
 import { ToastProvider } from '@/components/Toast'
 import { MotionPreferences } from '@/components/MotionPreferences'
 import { SmoothScroll } from '@/components/SmoothScroll'
+import { FloatingConcierge } from '@/components/FloatingConcierge'
 import './globals.css'
 
 const gloock = Gloock({
@@ -36,6 +37,7 @@ export default function RootLayout({
         <MotionPreferences><ToastProvider><SmoothScroll>
           <Header />
           <div className="site-content">{children}</div>
+          <FloatingConcierge />
         </SmoothScroll></ToastProvider></MotionPreferences>
       </body>
     </html>

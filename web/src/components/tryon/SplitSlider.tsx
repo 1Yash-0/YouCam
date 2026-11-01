@@ -38,6 +38,7 @@ export function SplitSlider({
   sliderPosition,
   onSliderPositionChange,
   caliperDrawn,
+  extras,
   className = '',
 }: SplitSliderProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -133,6 +134,7 @@ export function SplitSlider({
           alt="Original photo before the try-on"
           onLoad={event => { const image = event.currentTarget; if (image.naturalWidth && image.naturalHeight) setNaturalSize({ width: image.naturalWidth, height: image.naturalHeight }) }}
           fill
+          unoptimized={beforeImageUrl.startsWith('http') || beforeImageUrl.startsWith('data:')}
           sizes="(max-width: 768px) 100vw, 560px"
           priority
           className="object-contain bg-[var(--paper)]"
@@ -156,16 +158,28 @@ export function SplitSlider({
           src={afterImageUrl}
           alt="Virtual try-on result"
           fill
+          unoptimized={afterImageUrl.startsWith('http') || afterImageUrl.startsWith('data:')}
           sizes="(max-width: 768px) 100vw, 560px"
           priority
           className="object-contain bg-[var(--paper)]"
         />
 
-        {/* 'AFTER' label */}
-        <div className="absolute top-4 left-4 z-10 pointer-events-none">
-          <span className="text-[15px] px-2 py-1 bg-[var(--bg)] text-[var(--ink)]">
+        {/* 'AFTER' label & Active Styling Chips */}
+        <div className="absolute top-4 left-4 z-10 pointer-events-none flex flex-col gap-2">
+          <span className="text-[15px] px-2 py-1 bg-[var(--bg)] text-[var(--ink)] self-start">
             With
           </span>
+          {extras?.lipstick && (
+            <span className="flex items-center gap-1.5 px-2.5 py-1 bg-black/80 text-white text-[12px] rounded-full backdrop-blur-xs shadow-sm self-start">
+              <span className="w-2 h-2 rounded-full border border-white/40" style={{ backgroundColor: extras.lipstick.hex }} />
+              {extras.lipstick.name} ({extras.lipstick.intensity}%)
+            </span>
+          )}
+          {extras?.hairUp && (
+            <span className="flex items-center gap-1.5 px-2.5 py-1 bg-black/80 text-white text-[12px] rounded-full backdrop-blur-xs shadow-sm self-start">
+              👑 {extras.hairUp.title}
+            </span>
+          )}
         </div>
       </div>
 

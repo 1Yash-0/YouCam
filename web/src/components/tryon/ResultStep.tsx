@@ -74,7 +74,7 @@ export function ResultStep({
     ? state.baseResultImageUrl
     : state.resultImageUrl
   const hasFaceCalibration = product.type === 'single' || product.type === 'stud'
-  const canStyle = !state.isSampleFace && (hasFaceCalibration || product.type === 'necklace')
+  const canStyle = hasFaceCalibration || product.type === 'necklace'
   const capabilities = getProductCapabilities(product)
 
   const handleShareSave = async () => {
@@ -110,6 +110,7 @@ export function ResultStep({
           sliderPosition={state.splitPosition}
           onSliderPositionChange={onSliderPositionChange}
           caliperDrawn={true}
+          extras={state.extras}
           className="min-h-[320px] flex-1 aspect-auto rounded-none"
         />
         {/* While another size renders, a light bar sweeps the photo (static under reduced motion) */}
@@ -234,7 +235,7 @@ export function ResultStep({
         {canStyle && (
           <CompleteTheLook
             hidden={!showCompleteTheLook}
-            photoId={state.isSampleFace ? null : state.photoId}
+            photoId={state.isSampleFace ? 'sample' : state.photoId}
             extras={state.extras}
             isRendering={state.isPresetRendering || isComparingSize}
             cachedPresets={state.cachedPresets}

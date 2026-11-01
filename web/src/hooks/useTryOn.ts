@@ -573,16 +573,59 @@ export function useTryOn({ product, initialSizeCm }: UseTryOnProps) {
     }))
   }, [state.isPresetRendering])
 
-  const applyStyling = useCallback((extras: StylingExtras) => {
-    if (state.isPresetRendering || state.isSampleFace || submitBusy.current) return
+  const applyStyling = useCallback(async (extras: StylingExtras) => {
+    if (state.isPresetRendering || submitBusy.current) return
     const hasExtras = Boolean(extras.lipstick || extras.hairUp || extras.outfit || extras.stack?.length)
     if (!hasExtras) {
       clearStyling()
       return
     }
-    if (JSON.stringify(extras) === JSON.stringify(state.extras)) return
-    return submitTryOn(extras)
-  }, [state.isPresetRendering, state.isSampleFace, state.extras, submitTryOn, clearStyling])
+    if (!state.isSampleFace) {
+      if (JSON.stringify(extras) === JSON.stringify(state.extras)) return
+      return submitTryOn(extras)
+    }
+
+    const cleanBase = state.baseResultImageUrl || (product.id === 'orb-chain' ? '/samples/necklace.png' : '/samples/single-teardrop-3cm.png')
+
+    setState((prev) => ({
+      ...prev,
+      isPresetRendering: true,
+      error: null,
+    }))
+
+    try {
+      const response = await fetch('/api/style/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId: product.id,
+          photoId: 'sample',
+          baseImageUrl: cleanBase,
+          extras,
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        if (data.imageUrl) {
+          setState((prev) => ({
+            ...prev,
+            isPresetRendering: false,
+            extras,
+            resultImageUrl: data.imageUrl,
+            baseResultImageUrl: prev.baseResultImageUrl || cleanBase,
+            splitPosition: 85,
+            compareMode: 'original',
+          }))
+          return
+        }
+      }
+    } catch (err) {
+      console.warn('Style apply endpoint error:', err)
+    }
+
+    setState((prev) => ({ ...prev, isPresetRendering: false }))
+  }, [state.isPresetRendering, state.isSampleFace, state.baseResultImageUrl, state.resultImageUrl, product.id, submitTryOn, clearStyling])
 
   const toggleOutfit = useCallback(() => {
     if (state.isPresetRendering || state.isSampleFace) return

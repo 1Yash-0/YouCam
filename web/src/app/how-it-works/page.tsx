@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { IrisNarrative } from '@/components/home/IrisNarrative'
+import { CategoryScaleSection } from '@/components/home/CategoryScaleSection'
 
 export const metadata: Metadata = {
   title: 'How we scale jewellery · Darpan',
@@ -20,37 +21,26 @@ export default function HowItWorksPage() {
           <a href="#necklace-method">Necklaces: chain length</a>
           <a href="#watch-method">Watches: wrist reference</a>
           <a href="#ring-method">Rings & bracelets: visual fit</a>
+          <Link href="/why-youcam" className="text-[var(--gold)]">Why YouCam API</Link>
         </nav>
       </header>
 
       <div id="earring-method" className="scroll-mt-[var(--header-h)]"><IrisNarrative /></div>
 
-      <div className="mx-auto max-w-6xl px-6 pb-24 sm:px-10 lg:px-16">
-        <div id="necklace-method" className="grid scroll-mt-[var(--header-h)] gap-8 border-t border-[var(--line)] py-10 md:grid-cols-[1fr_2fr] md:gap-20">
-          <h2 className="font-display text-3xl sm:text-4xl">Necklaces</h2>
-          <div className="max-w-2xl space-y-5 text-[var(--ink-2)] leading-relaxed">
-            <p>The product’s chain length guides the preview. The same necklace can sit differently with another neckline or pose, so drape remains approximate.</p>
-          </div>
-        </div>
+      <div className="mx-auto max-w-6xl px-6 pb-24 sm:px-10 lg:px-16 space-y-12 mt-12">
+        <CategoryScaleSection category="necklace" />
+        <CategoryScaleSection category="watch" />
+        <CategoryScaleSection category="ring" />
 
-        <div id="watch-method" className="grid scroll-mt-[var(--header-h)] gap-8 border-t border-[var(--line)] py-10 md:grid-cols-[1fr_2fr] md:gap-20">
-          <h2 className="font-display text-3xl sm:text-4xl">Watches</h2>
-          <div className="max-w-2xl space-y-5 text-[var(--ink-2)] leading-relaxed">
-            <p>The case is scaled against a 60 mm reference wrist. Compare the published case dimensions with your own wrist when choosing your size.</p>
-          </div>
-        </div>
-        <div id="ring-method" className="grid scroll-mt-[var(--header-h)] gap-8 border-t border-[var(--line)] py-10 md:grid-cols-[1fr_2fr] md:gap-20">
-          <h2 className="font-display text-3xl sm:text-4xl">Rings & bracelets</h2>
-          <div className="max-w-2xl space-y-5 text-[var(--ink-2)] leading-relaxed">
-            <p>Prepared ring references use your selected US ring size to estimate stone proportions. Other rings and bracelets fit visually to the photo; their published dimensions stay visible as a guide.</p>
-          </div>
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-6 border-t border-[var(--line)] pt-8">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-6 border-t border-[var(--line)] pt-8">
           <p className="max-w-xl text-sm leading-relaxed text-[var(--ink-2)]">Try-on is a visual guide. Use the product’s published dimensions and your retailer’s fit advice before buying.</p>
-          <Link href="/try-on/gilded-teardrop?sample=1" className="inline-flex min-h-[52px] items-center bg-[var(--ink)] px-8 text-base text-[var(--paper)] hover:bg-[var(--ink-2)] focus-visible:outline-2 focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2">Try a sample</Link>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="/why-youcam" className="inline-flex min-h-[52px] items-center border border-[var(--gold)]/60 bg-[var(--gold)]/10 px-6 text-sm font-medium text-[var(--gold)] hover:bg-[var(--gold)] hover:text-white transition-colors">Why YouCam AI API</Link>
+            <Link href="/try-on/gilded-teardrop?sample=1" className="inline-flex min-h-[52px] items-center bg-[var(--ink)] px-8 text-base text-[var(--paper)] hover:bg-[var(--gold)] hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2">Try a sample</Link>
+          </div>
         </div>
       </div>
     </main>
   )
 }
+

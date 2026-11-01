@@ -165,6 +165,7 @@ export interface SplitSliderProps {
   sliderPosition: number
   onSliderPositionChange: (pos: number) => void
   caliperDrawn: boolean
+  extras?: StylingExtras
   className?: string
 }
 

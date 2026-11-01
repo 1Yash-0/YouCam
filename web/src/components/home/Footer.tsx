@@ -16,6 +16,9 @@ export function Footer() {
           <Link href="/how-it-works" className="link-draw text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-[var(--gold)] focus-visible:outline-offset-[3px]">
             How sizing works
           </Link>
+          <Link href="/why-youcam" className="link-draw text-[var(--gold)] font-medium focus-visible:outline-2 focus-visible:outline-[var(--gold)] focus-visible:outline-offset-[3px]">
+            Why YouCam API
+          </Link>
           <Link href="/for-retailers" className="link-draw text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-[var(--gold)] focus-visible:outline-offset-[3px]">
             For retailers
           </Link>

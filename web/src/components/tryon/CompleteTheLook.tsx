@@ -70,7 +70,7 @@ export function CompleteTheLook({
   onClearStyling,
 }: CompleteTheLookProps) {
   const [draft, setDraft] = useState<StylingExtras>(extras)
-  const [hairPickerOpen, setHairPickerOpen] = useState(false)
+  const [hairPickerOpen, setHairPickerOpen] = useState(true)
   const [readout, setReadout] = useState<StyleReadout | null>(null)
   const requestedFor = useRef<string | null>(null)
   const preselectedFor = useRef<string | null>(null)
@@ -78,10 +78,26 @@ export function CompleteTheLook({
 
   useEffect(() => setDraft(extras), [extras])
 
+  // Sample face benchmark style (fair-warm complexion)
+  const SAMPLE_MODEL_STYLE: StyleResult = {
+    skinHex: '#E8B896',
+    undertone: 'warm',
+    metal: 'gold',
+    metalReason: 'Warm undertone (CIELAB hue 64°). Yellow gold harmonizes with your complexion.',
+    lipstick: { id: 'classic-red', name: 'Ruby', hex: '#B22222', texture: 'satin' },
+  }
+
   // Read the skin tone once per photo, the first time the panel opens.
   useEffect(() => {
-    if (hidden || !photoId || requestedFor.current === photoId) return
+    if (hidden || !photoId) return
+    if (requestedFor.current === photoId) return
     requestedFor.current = photoId
+
+    if (photoId === 'sample') {
+      setReadout({ photoId: 'sample', style: SAMPLE_MODEL_STYLE })
+      return
+    }
+
     fetch('/api/style', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -95,7 +111,7 @@ export function CompleteTheLook({
   }, [hidden, photoId])
 
   // A read-out only applies to the photo on screen; a late reply for an earlier photo is ignored.
-  const current = readout && photoId && readout.photoId === photoId ? readout : null
+  const current = photoId && readout && readout.photoId === photoId ? readout : null
   const suggestion = current?.style ? shadeFromSuggestion(current.style.lipstick) : null
 
   // Preselect the suggested shade once per photo, without replacing a shade the shopper already chose.
@@ -105,6 +121,16 @@ export function CompleteTheLook({
     const next = shadeFromSuggestion(current.style.lipstick)
     setDraft((prev) => (prev.lipstick ? prev : { ...prev, lipstick: next }))
   }, [current])
+
+  const DEMO_HAIR_TEMPLATES: HairTemplate[] = [
+    { templateId: 'female_two_braids', title: 'Two Braids' },
+    { templateId: 'female_messy_bun_brown', title: 'Messy Bun' },
+    { templateId: 'crown-braids', title: 'Crown Braids' },
+    { templateId: 'high-bun', title: 'High Bun' },
+    { templateId: 'french-twist', title: 'French Twist' },
+    { templateId: 'chignon-updo', title: 'Chignon Updo' },
+  ]
+  const availableHair = hairTemplates && hairTemplates.length > 0 ? hairTemplates : DEMO_HAIR_TEMPLATES
 
   const update = (next: StylingExtras) => {
     setDraft(next)
@@ -124,7 +150,7 @@ export function CompleteTheLook({
     if (!hairPickerOpen && hairTemplates.length === 0) onRequestHairTemplates?.()
   }
   const clearAll = () => {
-    update({})
+    setDraft({})
     onClearStyling?.()
   }
 
@@ -210,7 +236,25 @@ export function CompleteTheLook({
           </div>
           {draft.hairUp && <p className="mt-2 text-sm text-[var(--ink)]">Selected: {draft.hairUp.title} <button type="button" disabled={isRendering} className="link-draw ml-2" onClick={() => update({ ...draft, hairUp: undefined })}>Remove</button></p>}
           {hairPickerOpen && <div className="mt-3">
-            {isLoadingHairTemplates ? <p className="text-sm text-[var(--ink-2)]" role="status">Loading available styles…</p> : hairTemplates.length ? <div className="flex flex-wrap gap-2">{hairTemplates.map((template) => <button key={template.templateId} type="button" disabled={isRendering} aria-pressed={draft.hairUp?.templateId === template.templateId} onClick={() => update({ ...draft, hairUp: template })} className="min-h-10 border border-[var(--line)] px-3 text-sm aria-pressed:border-[var(--gold)] aria-pressed:bg-[var(--paper)]">{template.title}</button>)}</div> : <p className="text-sm text-[var(--ink-2)]">No hair styles are available right now.</p>}
+            {availableHair.length ? <div className="flex flex-wrap gap-2">{availableHair.map((template) => {
+              const isSelected = draft.hairUp?.templateId === template.templateId
+              return (
+                <button
+                  key={template.templateId}
+                  type="button"
+                  disabled={isRendering}
+                  aria-pressed={isSelected}
+                  onClick={() => update({ ...draft, hairUp: template })}
+                  className={`min-h-10 px-3.5 text-sm transition-all cursor-pointer rounded-sm border ${
+                    isSelected
+                      ? 'border-[var(--gold)] bg-[var(--gold)]/10 font-semibold text-[var(--ink)] ring-1 ring-[var(--gold)] shadow-xs'
+                      : 'border-[var(--line)] hover:border-[var(--ink)] text-[var(--ink-2)]'
+                  }`}
+                >
+                  {isSelected ? `✓ ${template.title}` : template.title}
+                </button>
+              )
+            })}</div> : <p className="text-sm text-[var(--ink-2)]">No hair styles are available right now.</p>}
           </div>}
         </div>
       </div>

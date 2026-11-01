@@ -38,7 +38,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
   const discStop = Math.min(1, Math.max(0, rulerStop(size)))
   const stopLeft = (value: number) => `calc(${DISC_PX / 2}px + ${rulerStop(value)} * (100% - ${DISC_PX}px))`
 
-  const tryOn = () => router.push(`/try-on/${product.id}${c.calibration ? `?size=${size}` : ''}`)
+  const tryOn = () => router.push(`/try-on/${product.id}?sample=1${c.calibration ? `&size=${size}` : ''}`)
 
   const saveChoice = () => {
     const label = selectionLabel(product, size)

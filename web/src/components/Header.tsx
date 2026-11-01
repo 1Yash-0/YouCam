@@ -16,7 +16,10 @@ type NavigationLink = {
 
 const navigationLinks: NavigationLink[] = [
   { label: 'Shop', href: '/collection' },
+  { label: 'AI Concierge', href: '/assistant' },
+  { label: 'AI Stylist', href: '/stylist' },
   { label: 'How sizing works', href: '/how-it-works' },
+  { label: 'Why YouCam API', href: '/why-youcam' },
   { label: 'For retailers', href: '/for-retailers' },
 ]
 
@@ -33,6 +36,10 @@ function isLinkActive(pathname: string, href: string) {
 
 export function Header() {
   const pathname = usePathname() ?? '/'
+  const productMatch = pathname.match(/^\/(?:p|try-on)\/([^/?#]+)/)
+  const activeProductId = productMatch ? productMatch[1] : 'gilded-teardrop'
+  const tryOnHref = `/try-on/${activeProductId}?sample=1`
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileMenuPresented, setMobileMenuPresented] = useState(false)
   const [scrolledAway, setScrolledAway] = useState(false)
@@ -199,7 +206,7 @@ export function Header() {
             </button>
 
             <Link
-              href={TRY_ON_HREF}
+              href={tryOnHref}
               data-press
               className="inline-flex min-h-11 items-center whitespace-nowrap bg-[var(--ink)] px-4 text-[15px] text-[var(--paper)] transition-colors duration-[180ms] ease-[var(--ease-out)] hover:bg-[var(--ink-2)] focus-visible:outline-2 focus-visible:outline-[var(--gold)] focus-visible:outline-offset-[3px]"
             >
