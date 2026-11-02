@@ -37,6 +37,7 @@ outputs/
 # Internal notes and dev-only tooling: kept locally, not published
 *.md
 !README.md
+!DEVPOST.md
 web/README.md
 docs/
 /scripts/
